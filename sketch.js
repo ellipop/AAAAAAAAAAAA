@@ -56,11 +56,11 @@ function draw() {
     fill("white");
     text(score, 250, 50);
   
-    //Ball Null
+    
       for(var i = 0; i < balls.length; i++){
         showBalls(balls[i]);
 
-        if (collide(balls[i])==true){
+        if (collide(balls[i], i)==true){
           score = +1;
         }
       }
@@ -88,8 +88,9 @@ function draw() {
   drawSprites();
 }
 
-function collide(ball){
+function collide(ball, index){
   if (ball != null){
+    console.log(ball)
     var distance = dist(ball.body.position.x, ball.body.position.y, basket.position.x, basket.position.y);
     if (distance <= 100){
       World.remove(world, ball);
@@ -103,14 +104,15 @@ function collide(ball){
 }
 
 function createBalls(){
-  ball = new Ball(200,200,50,50,10);
+  
   var randPOS = Math.round(random(20,400));
-  ball.position.x = randPOS;
+  ball = new Ball(randPOS,200,50,50,10);
+  
   balls.push(ball);
 }
 
 function  showBalls(ball){
   if (ball){
-    ball.display();
+    ball.show();
   }
 }
